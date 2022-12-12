@@ -1,4 +1,5 @@
 import sys
+import numpy as np
 
 def ColWin(x, mat):
     for i in range(0,x):
@@ -55,18 +56,43 @@ def checkWin(x,mat):
 
 
 
-def Joue(z, x, y, mat):
+def Joue(taille, z, x, y, mat):
     if x=="STOP" or y=="STOP":
         quit()
-    mat[x][y]=z
+    else:
+        x=int(x)
+        y=int(y)
+        print(mat[x][y])
+    if mat[x][y]!=None or (x<0 or x>=taille or y<0 and y>=taille):
+        x=input()
+        y=input()
+        Joue(taille,z,x,y,mat)
+    else:
+        mat[x][y]=z
 
-def End()
+def End(taille):
+    for i in range(0, taille):
+        for j in range(0, taille):
+            if mat[i][j]==None:
+                return 0
+    return -1
+
+turn=0
 
 for i in range(1, len(sys.argv)):
     print('argument:', i, 'value:', sys.argv[i])
 
-x = int(sys.argv[i])
-mat = [[None]*x]*x
-mat = [[0,2,7,4,5],[7,7,7,8,9],[7,11,7,12,13],[0,0,52,0,0], [0,0,52,0,0]]
-print(mat)
-checkWin(x,mat)
+rows = int(sys.argv[1])
+cols = int(sys.argv[1])
+taille = rows*cols
+mat = np.array([None]*taille).reshape(rows,cols)
+while End(rows)==0:
+    c1=input()
+    c2=input()
+    Joue(rows, turn, c1, c2, mat)
+    print(mat)
+    checkWin(rows,mat)
+    turn=(turn+1)%2
+print('égalité')
+quit()
+#mat = [[0,2,7,4,5],[7,7,7,8,9],[7,11,7,12,13],[0,0,52,0,0], [0,0,52,0,0]]
