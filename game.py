@@ -58,10 +58,12 @@ def checkWin(x,mat):
 
 
 def Joue(taille, z, x, y, mat, m):
+    print(x)
+    print(y)
     if x=="STOP" or y=="STOP":
         quit()
     else:
-        if x=="UNDO" or y=="UNDO":
+        if x=='UNDO' or y=='UNDO':
             Joue(taille, None, m//taille, m%taille, mat, None)
         else:
             x=int(x)
@@ -94,13 +96,17 @@ mat = np.array([None]*taille).reshape(rows,cols)
 while End(rows)==0:
     filin = open("test", "r")
     lignes = filin.readlines()
-    c1=int(lignes[0])
-    c2=int(lignes[1])
+    c1=str(lignes[0])
+    
+    if len(lignes)==2:
+        c2=str(lignes[1])
+    else:
+        c2=None
     Joue(rows, turn, c1, c2, mat, memory)
     print(mat)
     checkWin(rows,mat)
     turn=(turn+1)%2
-    if c1=="UNDO" or c2=="UNDO":
+    if c1=='UNDO' or c2=='UNDO':
         memory=None
     else:
         memory=int(c1)*rows+int(c2)
