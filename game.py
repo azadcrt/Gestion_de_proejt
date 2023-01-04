@@ -1,6 +1,6 @@
 import sys
 import numpy as np
-
+import time
 def ColWin(x, mat):
     for i in range(0,x):
         for j in range(0,x-2):
@@ -92,8 +92,10 @@ cols = int(sys.argv[1])
 taille = rows*cols
 mat = np.array([None]*taille).reshape(rows,cols)
 while End(rows)==0:
-    c1=input()
-    c2=input()
+    filin = open("test", "r")
+    lignes = filin.readlines()
+    c1=int(lignes[0])
+    c2=int(lignes[1])
     Joue(rows, turn, c1, c2, mat, memory)
     print(mat)
     checkWin(rows,mat)
@@ -102,6 +104,7 @@ while End(rows)==0:
         memory=None
     else:
         memory=int(c1)*rows+int(c2)
+    time.sleep(10)
 print('égalité')
 quit()
 #mat = [[0,2,7,4,5],[7,7,7,8,9],[7,11,7,12,13],[0,0,52,0,0], [0,0,52,0,0]]
