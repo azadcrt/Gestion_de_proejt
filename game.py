@@ -135,8 +135,8 @@ def lect(nbcol, indexx,indexy):
 if(len(sys.argv)<3):
     print('Mauvais usage du jeu : python3 nomfichier taillePlateau coupParTour')
     quit()
-if(int(sys.argv[1])<3):
-    print('Mauvais usage du jeu : premier argument supérieur ou égal à 3')
+if(int(sys.argv[1])<3 or int(sys.argv[1])>9):
+    print('Mauvais usage du jeu : premier argument supérieur ou égal à 3 et inférieur à 10')
     quit()
 if(int(sys.argv[2])>2 or int(sys.argv[2])<0):
     print('Mauvais usage du jeu : deuxième argument supérieur égal à 1 ou 2')
