@@ -153,9 +153,9 @@ rows = int(sys.argv[1])
 cols = int(sys.argv[1])
 taille = rows*cols
 mat = np.array([None]*taille).reshape(rows,cols)
+
 while End(rows)==0:
     screen.fill((255, 255, 255))
-    
     filin = open("test", "r")
     lignes = filin.readlines()
     c1=str(lignes[0])
@@ -166,6 +166,7 @@ while End(rows)==0:
 
     Joue(rows, turn, c1, c2, mat, memory)
     
+    #c1 et c2 ne sont en réalité peut être plus les mêmes donc on les relis.
     filin = open("test", "r")
     lignes = filin.readlines()
     c1=str(lignes[0])
@@ -177,17 +178,20 @@ while End(rows)==0:
     print(mat)
     checkWin(rows,mat)
     
+    #on vérifie que le joueur a bien joué le nombre de tour qu'il devait jouer.
     if(nbplay<int(sys.argv[2])):
         nbplay=nbplay+1
     else:
         turn=(turn+1)%2
         nbplay=1
-        
+    
+    #On enregistre que le dernier coup, donc si l'instruction était "UNDO", on met None dans la mémory pour que le joueur ne puisse pas undo à nouveau
     if c1=='UNDO' or c2=='UNDO':
         memory=None
     else:
         memory=int(c1)*rows+int(c2)
 
+    #Lis la matrice pour faire l'affichage
     loctab = lect(cols,0,0)
     grill(int(ws/loctab[2]))
     for i in range(0,rows):
@@ -197,11 +201,6 @@ while End(rows)==0:
                 cross(loctab[0],loctab[1],loctab[2])
             if(mat[i][j]==1):
                 circle(loctab[0],loctab[1],loctab[2])
-    
-   
-    
-
-    # Flip the display
 
     pygame.display.flip()
     time.sleep(10)  
