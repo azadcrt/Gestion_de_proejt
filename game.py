@@ -26,18 +26,18 @@ def RowWin(x, mat):
     return -1
 
 def checkDiagonals(x, mat):
-    for i in range(2,x-2):
+    for i in range(2,x-1):
         for j in range(0,x-2):
-            if mat[j][i] != None:
+            if mat[i][j] != None:
                 m1 = mat[i][j]
                 m2 = mat[i-1][j+1]
                 m3 = mat[i-2][j+2]
                 if m1==m2 and m1==m3:
                     return mat[i][j]
 
-    for i in range(0,x-2):
-        for j in range(0,x-2):
-            if mat[j][i] != None:
+    for i in range(0,x-3):
+        for j in range(0,x-3):
+            if mat[i][j] != None:
                 m1 = mat[i][j]
                 m2 = mat[i+1][j+1]
                 m3 = mat[i+2][j+2]
